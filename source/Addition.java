@@ -10,10 +10,4 @@ public class Addition extends Operation
     {
         result = num1 + num2;
     }
-
-    @Override
-    public String getOperationSymbol()
-    {
-        return "+";
-    }
 }
