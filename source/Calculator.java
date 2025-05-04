@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Calculator
@@ -27,27 +29,29 @@ public class Calculator
         return result;
     }
 
-    public void setNum1(String input)
+    public void setNum1(Scanner scanner, String input)
     {
-        try
-        {
-            num1 = Long.parseLong(input, numberSystem);
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("Ошибка: неверное корректное число для текущей системы счисления. В качестве num1 будет выведено 0");
+        while(true) {
+            try {
+                num1 = Long.parseLong(input, numberSystem);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: неверное корректное число для текущей системы счисления. Напишите новое число.");
+                input = scanner.nextLine().trim();
+            }
         }
     }
 
-    public void setNum2(String input)
+    public void setNum2(Scanner scanner, String input)
     {
-        try
-        {
-            num2 = Long.parseLong(input, numberSystem);
-        }
-        catch (NumberFormatException e)
-        {
-            System.out.println("Ошибка: неверное корректное число для текущей системы счисления. В качестве num2 будет выведено 0");
+        while(true) {
+            try {
+                num2 = Long.parseLong(input, numberSystem);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: неверное корректное число для текущей системы счисления. Напишите новое число.");
+                input = scanner.nextLine().trim();
+            }
         }
     }
 
@@ -65,12 +69,12 @@ public class Calculator
 
     public void performOperation(Operation operation)
     {
+
         try
         {
             operation.execute();
             result = operation.getResult();
-            //System.out.println("Результат: " + allSystem(result));
-            num1 = result;
+            num1 = result; // Если мы продолжим выполнять операции с текущим найденным числом
         }
         catch (ArithmeticException e)
         {
@@ -84,6 +88,21 @@ public class Calculator
                 ", HEX: " + Long.toHexString(number) +
                 ", OCT: " + Long.toOctalString(number) +
                 ", BIN: " + Long.toBinaryString(number);
+    }
+
+    public String getResultInCurrentSystem() {
+        switch (numberSystem) {
+            case 10:
+                return Long.toString(result);
+            case 16:
+                return Long.toHexString(result);
+            case 8:
+                return Long.toOctalString(result);
+            case 2:
+                return Long.toBinaryString(result);
+            default:
+                return Long.toString(result);
+        }
     }
 
     public static void Operation(Calculator calculator, Scanner scanner) {

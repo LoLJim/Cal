@@ -13,9 +13,10 @@ public class Main
             System.out.println("2) Выбрать систему счисления");
             System.out.println("3) Продолжить операции с результатом");
             System.out.println("4) Выход");
-            System.out.println("Результат: " + Calculator.allSystem(calculator.getResult()));
-            System.out.println("Текущая система счисления:" + calculator.getNumberSystem());
-            System.out.print("Введите номер действия: ");
+            System.out.println("Результат: " + calculator.allSystem(calculator.getResult()));
+            System.out.println("Результат в " + calculator.getNumberSystem() + " системе счисления: " + calculator.getResultInCurrentSystem());
+            System.out.println("Текущая система счисления: " + calculator.getNumberSystem());
+            System.out.print("\nВведите номер действия: ");
 
             String input = scanner.nextLine().trim();
 
@@ -23,9 +24,9 @@ public class Main
             {
                 case "1":
                     System.out.print("Введите первое число: ");
-                    calculator.setNum1(scanner.nextLine().trim());
+                    calculator.setNum1(scanner, scanner.nextLine());
                     System.out.print("Введите второе число: ");
-                    calculator.setNum2(scanner.nextLine().trim());
+                    calculator.setNum2(scanner, scanner.nextLine());
                     calculator.Operation(calculator, scanner);
                     break;
                 case "2":
@@ -39,7 +40,7 @@ public class Main
                     break;
                 case "3":
                     System.out.print("Введите второе число: ");
-                    calculator.setNum2(scanner.nextLine().trim());
+                    calculator.setNum2(scanner, scanner.nextLine());
                     calculator.Operation(calculator, scanner);
                     break;
                 case "4":
